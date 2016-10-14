@@ -192,6 +192,20 @@ def main():
             dump_dbfile(db, f)
         print('Done!')
 
+    elif command == 'undo':
+        with open(db_fname) as f:
+            db = json.load(f, cls=MyDecoder)
+
+        last_node_id = db['log'][-1]['node']
+        last_node = db['nodes'][db['log'][-1]['node']]
+        if last_node_id == len(db['nodes']) - 1:
+            print('Deleting last node')
+            db['nodes'] = db['nodes'][:-1]
+        db['log'] = db['log'][:-1]
+        print('Saving database...')
+        with open(db_fname, 'w') as f:
+            dump_dbfile(db, f)
+        print('Done!')
 
 if __name__ == '__main__':
     main()
