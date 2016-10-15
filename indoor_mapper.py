@@ -210,7 +210,7 @@ def main():
             db = json.load(f, cls=MyDecoder)
 
         last_node_id = db['log'][-1]['node']
-        last_node = db['nodes'][db['log'][-1]['node']]
+        last_node = db['nodes'][last_node_id]
         if last_node_id == len(db['nodes']) - 1:
             print('Deleting last node')
             db['nodes'] = db['nodes'][:-1]
