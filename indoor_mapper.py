@@ -141,10 +141,11 @@ def main():
                 node_id = len(db['nodes'])
                 node = {'branches': {d: None for d in abs_branches},
                         'description': choice}
-                node['branches'][behind] = last_node_id
                 db['nodes'].append(node)
 
         db['nodes'][last_node_id]['branches'][currently_facing] = node_id
+        db['nodes'][node_id]['branches'][behind] = last_node_id
+
         # Now the node and id are saved in the node and node_id vars
         # We now need to decide which direction the user should be directed in
         # We accomplish this by doing BFS until an unexplored node is found
